@@ -1,0 +1,1 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=org.ratel.mybatis.spring.boot.autoconfigure.RatelMybatisAutoConfiguration
