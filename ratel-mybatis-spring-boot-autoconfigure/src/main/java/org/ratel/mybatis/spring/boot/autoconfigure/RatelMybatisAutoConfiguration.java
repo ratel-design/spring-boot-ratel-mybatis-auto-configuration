@@ -7,5 +7,6 @@ package org.ratel.mybatis.spring.boot.autoconfigure;
  * @date 2021/1/26 1:18 下午
  */
 public class RatelMybatisAutoConfiguration {
+    
 
 }
