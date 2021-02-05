@@ -2,6 +2,7 @@ package org.ratel.mybatis.spring.boot.parsing;
 
 import org.dom4j.Element;
 import org.dom4j.Node;
+import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,13 +23,19 @@ public class IfNodeHandler extends NodeHandler {
             return null;
         }
         if ("if".equals(name)) {
-            int  subNodeCount = nodeElement.attributeCount();
+            String test = nodeElement.attributeValue("test");
+            int  subNodeCount = nodeElement.nodeCount();
             List<SqlNode> contents = new ArrayList<>();
             for (int i = 0; i < subNodeCount; i++) {
                 SqlNode sqlNode = new NodeHandlerChain(nodeElement.node(i)).handle();
-                contents.add(sqlNode);
+                if (sqlNode != null) {
+                    contents.add(sqlNode);
+                }
             }
-            return new MixedSqlNode(contents);
+            if (CollectionUtils.isEmpty(contents)) {
+                return null;
+            }
+            return new IfSqlNode(test, new MixedSqlNode(contents));
         }
         return nextHandle(node);
     }

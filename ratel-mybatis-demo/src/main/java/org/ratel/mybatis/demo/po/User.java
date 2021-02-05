@@ -13,10 +13,20 @@ import java.util.Date;
 @Data
 public class User {
 
-    private int id;
+    private Integer id;
     private String username;
     private Date birthday;
     private String sex;
     private String address;
 
+    public User() {
+    }
+
+    public User(int id) {
+        this.id = id;
+    }
+
+    public User(String username) {
+        this.username = username;
+    }
 }

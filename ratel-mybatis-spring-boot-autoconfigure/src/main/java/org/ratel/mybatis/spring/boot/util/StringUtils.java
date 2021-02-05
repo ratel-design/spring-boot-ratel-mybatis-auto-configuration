@@ -71,7 +71,9 @@ public class StringUtils {
             if (matchPrefixBegin) {
                     tempText.append(textChars[i]);
             } else {
-                newText.append(textChars[i]);
+                if (textChars[i] != '\t' && textChars[i] != '\n' && textChars[i] != '\r') {
+                    newText.append(textChars[i]);
+                }
             }
         }
         if (tempText.length() > 0) {

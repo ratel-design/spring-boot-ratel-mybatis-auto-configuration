@@ -31,7 +31,7 @@ public class RatelMybatisConfiguration {
         this.mappedStatements.put(statementId, mappedStatement);
     }
 
-    public Map<String, RatelMappedStatement> getMappedStatements() {
-        return mappedStatements;
+    public RatelMappedStatement getMappedStatement(String statementId) {
+        return mappedStatements.get(statementId);
     }
 }

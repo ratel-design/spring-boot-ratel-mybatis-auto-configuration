@@ -33,17 +33,15 @@ public class MappedStatementBuilder {
      */
     public RatelMappedStatement builder() {
         RatelMappedStatement ratelMappedStatement = new RatelMappedStatement();
-        builderStatementId(ratelMappedStatement);
+        ratelMappedStatement.setStatementId(statementElement.attributeValue("id"));
+        String statementType = statementElement.attributeValue("statementType");
+        ratelMappedStatement.setStatementType(statementType == null || statementType == "" ? "PREPARED" : statementType);
         builderParameterTypeClass(ratelMappedStatement);
         builderResultTypeClass(ratelMappedStatement);
         // 解析sql
         builderSqlSource(ratelMappedStatement);
 
         return ratelMappedStatement;
-    }
-
-    private void builderStatementId(RatelMappedStatement ratelMappedStatement) {
-        ratelMappedStatement.setStatementId(statementElement.attributeValue("id"));
     }
 
     private void builderParameterTypeClass(RatelMappedStatement ratelMappedStatement) {
@@ -75,12 +73,14 @@ public class MappedStatementBuilder {
      * @param ratelMappedStatement
      */
     private void builderSqlSource(RatelMappedStatement ratelMappedStatement) {
-        int rootNodeCount = statementElement.attributeCount();
+        int rootNodeCount = statementElement.nodeCount();
         List<SqlNode> contents = new ArrayList<>();
         for (int i = 0; i < rootNodeCount; i++) {
             Node node = statementElement.node(i);
             SqlNode sqlNode = new NodeHandlerChain(node).handle();
-            contents.add(sqlNode);
+            if (sqlNode != null) {
+                contents.add(sqlNode);
+            }
         }
         SqlNode sqlNode = new MixedSqlNode(contents);
         if (sqlNode.isDynamic()) {

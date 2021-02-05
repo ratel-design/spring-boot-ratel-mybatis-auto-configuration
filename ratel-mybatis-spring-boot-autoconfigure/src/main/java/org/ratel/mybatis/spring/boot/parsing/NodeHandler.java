@@ -12,7 +12,7 @@ public abstract class NodeHandler {
 
     private NodeHandler next;
 
-    public NodeHandler setNext(NodeHandler next) {
+    protected NodeHandler setNext(NodeHandler next) {
         this.next = next;
         return this.next;
     }

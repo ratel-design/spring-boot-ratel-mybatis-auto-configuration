@@ -21,6 +21,9 @@ public class DynamicTokenHandler implements TokenHandler {
         if (params == null) {
             return "";
         }
+        if (params.getClass().isPrimitive()) {
+            return String.valueOf(params);
+        }
         Object replaceVal = OgnlUtils.getValue(replaceKey, params);
         return replaceVal == null ? "" : String.valueOf(replaceVal);
     }

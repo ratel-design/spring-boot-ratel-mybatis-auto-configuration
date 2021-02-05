@@ -4,3 +4,10 @@ server:
 ratel:
   mybatis:
     mapperLocations: classpath:/mapper/**/*.xml
+
+spring:
+  datasource:
+    jdbcUrl: jdbc:mysql://10.120.128.231:3307/ratel?serverTimezone=Hongkong&useUnicode=true&characterEncoding=utf8
+    username: sys_renmai_test
+    password: renmai!@#
+    driverClass: com.mysql.cj.jdbc.Driver

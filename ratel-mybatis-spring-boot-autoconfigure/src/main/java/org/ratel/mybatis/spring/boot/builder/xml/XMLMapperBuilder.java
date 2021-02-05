@@ -37,10 +37,8 @@ public class XMLMapperBuilder {
     public RatelMybatisConfiguration parse(InputStream inputStream) throws DocumentException {
         Document document = DocumentUtils.readDocument(inputStream);
         Element rootElement = document.getRootElement();
-        Element mapperElement = rootElement.element("mapper");
-        // mapper标签
-        String namespace = mapperElement.attributeValue("namespace");
-        List<Element> statementElements = mapperElement.elements();
+        String namespace = rootElement.attributeValue("namespace");
+        List<Element> statementElements = rootElement.elements();
         for (Element statementElement : statementElements) {
             // CRUD标签处理
             if (Arrays.stream(STATEMENT_TAG_NAMES).anyMatch(str -> str.equals(statementElement.getName()))) {

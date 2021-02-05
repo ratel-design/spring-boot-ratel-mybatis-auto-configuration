@@ -32,6 +32,9 @@ public class DynamicContext {
     }
 
     public void appendSql(String sql) {
+        if (sql == null || (sql = sql.trim()) == "") {
+            return;
+        }
         sb.append(sql).append(" ");
     }
 

@@ -26,12 +26,9 @@ public class NodeHandlerChain {
      * @return
      */
     public SqlNode handle() {
-        List<SqlNode> contents = new ArrayList<>();
         TextNodeHandler textNodeHandler = new TextNodeHandler();
-        IfNodeHandler ifNodeHandler = new IfNodeHandler();
         // TODO:MQH 2021/2/4 where、set ...
-        textNodeHandler.setNext(ifNodeHandler);
-        textNodeHandler.handleNode(node);
-        return new MixedSqlNode(contents);
+        textNodeHandler.setNext(new IfNodeHandler());
+        return textNodeHandler.handleNode(node);
     }
 }

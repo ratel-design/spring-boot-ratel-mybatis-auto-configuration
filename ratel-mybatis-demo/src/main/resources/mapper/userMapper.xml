@@ -8,11 +8,18 @@
             resultType="org.ratel.mybatis.demo.po.User"
             statementType="PREPARED">
 
-        SELECT * FROM user WHERE id = #{id} and sex = #{sex} AND username like '%${username}'
+        SELECT * FROM `user`
+        WHERE 1=1
+        <if test="id != null ">
+            and id = #{id}
+        </if>
+        <if test="sex != null and sex !='' ">
+            and sex = #{sex}
+        </if>
         <if test="username != null and username !='' ">
-            AND username like '%${username}'
-            <if test="username != null and username !=''">
-                AND 1=1
+            AND username like '${username}%'
+            <if test="address != null and address !=''">
+                AND address = #{address}
             </if>
         </if>
     </select>
